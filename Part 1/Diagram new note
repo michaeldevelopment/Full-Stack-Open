@@ -1,0 +1,27 @@
+/// User add a new note -->
+
+// browser - server --> Send the user input to the server with POST req to /new-notes
+
+The server have the response to the req done.
+The response is the Status 302 Code -> Redirect (to /new-notes)
+
+Here the browser sends the data put in the form.
+
+// server - browser --> Redirect to /new-note
+
+Add the new notes to notes with push
+Re render all the site of /notes with the new note.
+
+// browser - server --> get request to render /notes
+// server - browser --> fetch HTML file
+
+// browser - server --> the HTML file request the CSS and js files
+// server - browser --> fetch that files
+
+// browser - server --> get request fetching de data that is requesting in the js file
+// server - browser --> render Data.Json in browser with DOM-API method
+
+
+
+
+

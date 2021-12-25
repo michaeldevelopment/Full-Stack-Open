@@ -1,0 +1,24 @@
+/// User add a new note SPA -->
+
+The js code has changed.
+
+//* The code access to the form DOM. When the button is clicked, 
+it obtains the data in the user input and send it to the server.
+
+// browser - server --> Send the user input to the server with POST req to /new-notes-SPA
+
+The server have the response to the req done.
+The response is the Status 202 Created -> Redirect (to /new-notes-SPA)
+
+// server - browser --> 
+
+
+// browser - server --> get request to render /notes
+// server - browser --> fetch HTML file
+
+// browser - server --> the HTML file request the CSS and js files
+// server - browser --> fetch that files
+
+// browser - server --> get request fetching de data that is requesting in the js file
+// server - browser --> render Data.Json in browser with DOM-API method
+
