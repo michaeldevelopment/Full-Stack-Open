@@ -1,17 +1,16 @@
-/// User add a new note SPA -->
+/// User add a new note -->
 
-The js code has changed.
-
-//* The code access to the form DOM. When the button is clicked, 
-it obtains the data in the user input and send it to the server.
-
-// browser - server --> Send the user input to the server with POST req to /new-notes-SPA
+// browser - server --> Send the user input to the server with POST req to /new-notes
 
 The server have the response to the req done.
-The response is the Status 202 Created -> Redirect (to /new-notes-SPA)
+The response is the Status 302 Code -> Redirect (to /new-notes)
 
-// server - browser --> 
+Here the browser sends the data submitted from the form.
 
+// server - browser --> Redirect to /new-note
+
+Add the new notes to notes with push
+Re render all the site of /notes with the new note.
 
 // browser - server --> get request to render /notes
 // server - browser --> fetch HTML file
@@ -21,4 +20,8 @@ The response is the Status 202 Created -> Redirect (to /new-notes-SPA)
 
 // browser - server --> get request fetching de data that is requesting in the js file
 // server - browser --> render Data.Json in browser with DOM-API method
+
+
+
+
 

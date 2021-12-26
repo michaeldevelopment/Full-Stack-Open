@@ -1,0 +1,7 @@
+The main difference between both is that without SPA the webpage has to rerender again when the post method
+is received by the server. The server do the req to the browser to rerender the webpage again in all the
+Get request process (// HTML, CSS, JS, etc.)
+
+Otherwise, SPA executes the render of the file HTML, CSS and js ONCE. In the moment that User submit the form,
+the DOM in the js file fetch the data, add it to the notes list, rerender ONLY the UL LIST and send the data to the server
+with post method.
