@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Anecdotes2 from './Anecdotes2';
+import ToDoList from './ToDoList';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Anecdotes2 />
+    <ToDoList />
   </React.StrictMode>,
   document.getElementById('root')
 );
