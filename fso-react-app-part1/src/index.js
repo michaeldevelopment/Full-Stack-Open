@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ToDoList from './ToDoList';
+// import AppFormsExercises from './AppFormsExercises';
+import AppPart2 from './AppPart2';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ToDoList />
+    <AppPart2 />
   </React.StrictMode>,
   document.getElementById('root')
 );
