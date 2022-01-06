@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import AppFormsExercises from './AppFormsExercises';
-import AppPart2 from './AppPart2';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppPart2 />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
