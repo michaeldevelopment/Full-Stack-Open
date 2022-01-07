@@ -7,8 +7,7 @@ import PersonsFiltered from './ComponentsFormPersons/PersonsFiltered';
 import PersonsForm from './ComponentsFormPersons/PersonsForm';
 
 const App = () => {
-  const [data, setData] = useState([]);
-  const [persons, setPersons] = useState(data);
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState();
   const [newFilter, setNewFilter] = useState('');
@@ -16,10 +15,10 @@ const App = () => {
   useEffect(() => {
     axios
       .get('http://localhost:3001/persons')
-      .then((response) => setData(response.data));
+      .then((response) => setPersons(response.data));
   }, []);
 
-  console.log(data);
+  console.log(persons);
 
   const addPeople = (e) => {
     e.preventDefault();
