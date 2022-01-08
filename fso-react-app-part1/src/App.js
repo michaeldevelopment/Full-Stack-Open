@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const App = () => {
   const [countries, setCountries] = useState([]);
-  const [filter, setFilter] = useState('');
+  const [filter, setNewFilter] = useState('');
 
   useEffect(() => {
     axios
@@ -12,18 +12,17 @@ const App = () => {
       .then((response) => setCountries(response.data));
   }, []);
 
-  console.log(countries[0]);
-
   const handleFilterInput = (e) => {
-    setFilter(e.target.value);
+    setNewFilter(e.target.value);
   };
 
   return (
     <div>
-      <h2>Find Countries! </h2>
+      <h2>Phonebook</h2>
       <p>
-        Find Countries: <input onChange={handleFilterInput} />
+        filter shown: <input onChange={handleFilterInput} />
       </p>
+      {filter}
     </div>
   );
 };
