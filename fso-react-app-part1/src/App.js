@@ -1,54 +1,69 @@
 import React, { useState, useEffect } from 'react';
+import noteServices from './services/notes';
 
-import axios from 'axios';
-
-import Persons from './ComponentsFormPersons/Persons';
-import PersonsFiltered from './ComponentsFormPersons/PersonsFiltered';
-import PersonsForm from './ComponentsFormPersons/PersonsForm';
+const Note = ({ note, toggleImportance }) => {
+  const label = !note.important ? 'make not important' : 'make important';
+  return (
+    <li>
+      {note.content}
+      <button onClick={toggleImportance}>{label}</button>
+    </li>
+  );
+};
 
 const App = () => {
-  const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState('');
-  const [newNumber, setNewNumber] = useState();
-  const [newFilter, setNewFilter] = useState('');
+  const [notes, setNotes] = useState([]);
+  const [showAll, setShowAll] = useState(true);
+  const [newNote, setNewNote] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then((response) => setPersons(response.data));
+    noteServices.getAll().then((response) => setNotes(response.data));
   }, []);
 
-  const addPeople = (e) => {
-    e.preventDefault();
-    window.alert(
-      `${newName} with number ${newNumber} has been added to the PhoneBook`
-    );
-    setPersons([...persons, { name: newName, number: newNumber }]);
+  const toggleImportanceOf = (id) => {
+    const url = `http://localhost:3001/notes/${id}`;
+    const note = notes.find((n) => n.id === id);
+    const changedNote = { ...note, important: !note.important };
+
+    noteServices.update(id, changedNote).then((response) => {
+      setNotes((note) => (note.id === id ? response.data : note));
+    });
   };
 
-  const handleNameInput = (e) => {
-    setNewName(e.target.value);
-  };
+  const addNote = (e) => {
+    e.preventDefault()
+    const noteObject = {
+      content: newNote,
+      date: new Date().toISOString(),
+      important: Math.random() > 0.5
+    }
 
-  const handleNumberInput = (e) => {
-    setNewNumber(e.target.value);
-  };
-
-  const handleFilterInput = (e) => {
-    setNewFilter(e.target.value);
-  };
-
-  const personsFilter = persons.filter((p) => p.name === newFilter);
+    noteServices
+      .create(noteObject)
+      .then(response => {
+        setNotes(notes.concat(response.data))
+        setNewNote('')
+      })
+  }
 
   return (
     <div>
-      <h2>Phonebook</h2>
-      <p>
-        filter shown: <input onChange={handleFilterInput} />
-      </p>
-      <PersonsForm props={[addPeople, handleNameInput, handleNumberInput]} />
-      <Persons persons={persons} />
-      <PersonsFiltered personsFilter={personsFilter} />
+      <h1>Notes</h1>
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll ? 'important' : 'all'}
+        </button>
+      </div>
+      <ul>
+        {notes.map((note) => (
+          <Note
+            key={note.id}
+            note={note}
+            toggleImportance={() => toggleImportanceOf(note.id)}
+          />
+        ))}
+      </ul>
+      <button onClick={addNote}> Add note </button>
     </div>
   );
 };
