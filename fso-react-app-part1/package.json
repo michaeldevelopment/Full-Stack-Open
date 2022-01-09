@@ -23,9 +23,7 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ],
-
-    "import/no-anonymous-default-export": ["error", {
+    ], "import/no-anonymous-default-export": ["error", {
       "allowArray": false,
       "allowArrowFunction": false,
       "allowAnonymousClass": false,

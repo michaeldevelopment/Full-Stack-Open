@@ -21,12 +21,11 @@ const App = () => {
   }, []);
 
   const toggleImportanceOf = (id) => {
-    const url = `http://localhost:3001/notes/${id}`;
     const note = notes.find((n) => n.id === id);
     const changedNote = { ...note, important: !note.important };
 
     noteServices.update(id, changedNote).then((response) => {
-      setNotes((note) => (note.id === id ? response.data : note));
+      setNotes((note) => (note.id === id ? response.data : note)).catch(error => console.log(error));
     });
   };
 
