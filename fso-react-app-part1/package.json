@@ -14,8 +14,8 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "node index2",
-    "dev": "nodemon index2",
+    "start": "node exercises3a",
+    "dev": "nodemon exercises3a",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
