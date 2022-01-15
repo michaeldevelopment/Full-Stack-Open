@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
 
 app.use(express.json());
 
@@ -26,7 +27,7 @@ const persons = [
   },
 ];
 
-app.get('/api/persons', (req, res) => {
+app.get('/api/persons', morgan('tiny'), (req, res) => {
   res.json(persons);
 });
 
@@ -51,30 +52,38 @@ app.delete('/api/persons/:id', (req, res) => {
   res.json(personsFiltered);
 });
 
-app.post('/api/persons', (req, res) => {
-  const newId = Math.floor(Math.random() * 200);
-  // const newId = Math.max(persons.map(n => n.id));
-  // newId = newId + 1;
-  const body = req.body;
+app.post(
+  '/api/persons',
+  morgan(':method :url :status :res[content-length] - :response-time ms'),
+  (req, res) => {
+    const newId = Math.floor(Math.random() * 200);
+    // const newId = Math.max(persons.map(n => n.id));
+    // newId = newId + 1;
+    req.body = {
+      name: 'Hola',
+      number: '123213',
+    };
 
-  if (!body.name || !body.number) {
-    return res.status(404).json({
-      error: 'error is missing',
-    });
+    const body = req.body;
+
+    if (!body.name || !body.number) {
+      return res.status(404).json({
+        error: 'error is missing',
+      });
+    }
+
+    const newPerson = {
+      id: newId,
+      name: body.name,
+      number: body.number,
+    };
+
+    req.body = [...persons, newPerson];
+    res.json(req.body);
   }
-
-  const newPerson = {
-    id: newId,
-    name: body.name,
-    number: body.number,
-  };
-
-  req.body = [...persons, newPerson];
-  res.json(req.body);
-});
+);
 
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
